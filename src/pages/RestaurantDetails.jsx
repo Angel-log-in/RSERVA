@@ -3,11 +3,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const restaurants = [
-  { id: 1, name: "Restaurante Italiano", location: "Centro", type: "Italiana", price: "$$", rating: 4.5, image: "https://via.placeholder.com/150" },
-  { id: 2, name: "Comida Mexicana", location: "Norte", type: "Mexicana", price: "$", rating: 4.0, image: "https://via.placeholder.com/150" },
-  { id: 3, name: "Sushi Bar", location: "Sur", type: "Japonesa", price: "$$$", rating: 4.8, image: "https://via.placeholder.com/150" },
-  { id: 4, name: "Parrilla Argentina", location: "Centro", type: "Argentina", price: "$$", rating: 4.7, image: "https://via.placeholder.com/150" },
-  { id: 5, name: "Cafetería Francesa", location: "Norte", type: "Francesa", price: "$$", rating: 4.3, image: "https://via.placeholder.com/150" }
+  { id: 1, name: "Restaurante Italiano", location: "Centro", type: "Italiana", price: "$$", rating: 4.5, image: "https://cdn.pixabay.com/photo/2023/07/26/16/43/food-8151625_640.jpg" },
+  { id: 2, name: "Comida Mexicana", location: "Norte", type: "Mexicana", price: "$", rating: 4.0, image: "https://cdn.pixabay.com/photo/2017/06/29/20/09/mexican-2456038_640.jpg" },
+  { id: 3, name: "Sushi Bar", location: "Sur", type: "Japonesa", price: "$$$", rating: 4.8, image: "https://cdn.pixabay.com/photo/2021/01/01/15/31/sushi-balls-5878892_640.jpg" },
+  { id: 4, name: "Parrilla Argentina", location: "Centro", type: "Argentina", price: "$$", rating: 4.7, image: "https://cdn.pixabay.com/photo/2016/01/22/02/13/meat-1155132_640.jpg" },
+  { id: 5, name: "Cafetería Francesa", location: "Norte", type: "Francesa", price: "$$", rating: 4.3, image: "https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg" },
+  { id: 6, name: "Como dice el dicho", location: "Centro", type: "Mexicana", price: "Bajo", rating: 4.3, image: "https://cdn.pixabay.com/photo/2021/07/13/18/58/coffee-6464307_640.jpg" },
+  { id: 7, name: "Tacos los primos", location: "Norte", type: "Mexicana", price: "Bajo", rating: 4.3, image: "https://cdn.pixabay.com/photo/2021/01/19/23/16/tacos-5932654_640.jpg" },
+  { id: 8, name: "Manduca", location: "Sur", type: "Italiana", price: "Alto", rating: 4.3, image: "https://cdn.pixabay.com/photo/2014/04/22/02/56/pizza-329523_640.jpg" },
+  { id: 9, name: "Mushu Sushi", location: "Centro", type: "Japonesa", price: "Medio", rating: 5.0, image: "https://cdn.pixabay.com/photo/2020/01/06/19/31/japanese-sushi-4746059_640.jpg" },
+  { id: 10, name: "Mi refugio", location: "Norte", type: "Mexiacana", price: "Alto", rating: 4.3, image: "https://cdn.pixabay.com/photo/2018/10/14/18/29/meatloaf-3747129_640.jpg" },
 ];
 
 export default function RestaurantDetails() {

@@ -2,11 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const restaurants = [
-  { id: 1, name: "Restaurante Italiano", location: "Centro", type: "Italiana", price: "$$", rating: 4.5, image: "https://via.placeholder.com/150" },
-  { id: 2, name: "Comida Mexicana", location: "Norte", type: "Mexicana", price: "$", rating: 4.0, image: "https://via.placeholder.com/150" },
-  { id: 3, name: "Sushi Bar", location: "Sur", type: "Japonesa", price: "$$$", rating: 4.8, image: "https://via.placeholder.com/150" },
-  { id: 4, name: "Parrilla Argentina", location: "Centro", type: "Argentina", price: "$$", rating: 4.7, image: "https://via.placeholder.com/150" },
-  { id: 5, name: "Cafetería Francesa", location: "Norte", type: "Francesa", price: "$$", rating: 4.3, image: "https://via.placeholder.com/150" }
+  { id: 1, name: "Restaurante Italiano", location: "Centro", type: "Italiana", price: "Medio", rating: 4.5, image: "https://cdn.pixabay.com/photo/2021/09/02/13/36/pizza-6593504_960_720.jpg" },
+  { id: 2, name: "Comida Mexicana", location: "Norte", type: "Mexicana", price: "Bajo", rating: 4.0, image: "https://cdn.pixabay.com/photo/2020/12/02/19/00/tacos-5798445_960_720.jpg" },
+  { id: 3, name: "Sushi Bar", location: "Sur", type: "Japonesa", price: "Alto", rating: 4.8, image: "https://cdn.pixabay.com/photo/2020/03/22/08/43/sushi-4956246_960_720.jpg" },
+  { id: 4, name: "Parrilla Argentina", location: "Centro", type: "Argentina", price: "Medio", rating: 4.7, image: "https://cdn.pixabay.com/photo/2017/10/06/16/28/bbq-2823707_1280.jpg" },
+  { id: 5, name: "Cafetería Francesa", location: "Norte", type: "Francesa", price: "Medio", rating: 4.3, image: "https://cdn.pixabay.com/photo/2016/08/04/18/16/coffee-1569682_960_720.jpg" },
+  { id: 6, name: "Como dice el dicho", location: "Centro", type: "Mexicana", price: "Bajo", rating: 4.3, image: "https://cdn.pixabay.com/photo/2016/09/01/22/43/coffee-1637907_640.jpg" },
+  { id: 7, name: "Tacos los primos", location: "Norte", type: "Mexicana", price: "Bajo", rating: 4.3, image: "https://cdn.pixabay.com/photo/2014/01/14/22/14/tacos-245241_640.jpg" },
+  { id: 8, name: "Manduca", location: "Sur", type: "Italiana", price: "Alto", rating: 4.3, image: "https://cdn.pixabay.com/photo/2021/05/18/15/15/pasta-6263653_640.jpg" },
+  { id: 9, name: "Mushu Sushi", location: "Centro", type: "Japonesa", price: "Medio", rating: 5.0, image: "https://cdn.pixabay.com/photo/2023/07/07/17/47/sushi-8113165_1280.jpg" },
+  { id: 10, name: "Mi refugio", location: "Norte", type: "Mexiacana", price: "Alto", rating: 4.3, image: "https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_640.jpg" },
 ];
 
 export default function Home() {
@@ -55,13 +60,15 @@ export default function Home() {
           <option value="Italiana">Italiana</option>
           <option value="Mexicana">Mexicana</option>
           <option value="Japonesa">Japonesa</option>
+          <option value="Francesa">Francesa</option>
+          <option value="Argentina">Argentina</option>
         </select>
 
         <select name="price" onChange={handleFilterChange} className="p-2 border rounded">
           <option value="">Precio</option>
-          <option value="$">$</option>
-          <option value="$$">$$</option>
-          <option value="$$$">$$$</option>
+          <option value="$">Bajo</option>
+          <option value="$$">Medio</option>
+          <option value="$$$">Alto</option>
         </select>
 
         <select name="rating" onChange={handleFilterChange} className="p-2 border rounded">

@@ -131,7 +131,7 @@ export default function Profile() {
 
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 mt-4 w-full rounded-lg"
+            className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded-lg"
           >
             Cerrar Sesión
           </button>
