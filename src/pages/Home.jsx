@@ -1,112 +1,103 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FaInstagram, FaFacebook,FaTwitter, FaTiktok } from "react-icons/fa";
 
-const restaurants = [
-  { id: 1, name: "Restaurante Italiano", location: "Centro", type: "Italiana", price: "Medio", rating: 4.5, image: "https://cdn.pixabay.com/photo/2021/09/02/13/36/pizza-6593504_960_720.jpg" },
-  { id: 2, name: "Comida Mexicana", location: "Norte", type: "Mexicana", price: "Bajo", rating: 4.0, image: "https://cdn.pixabay.com/photo/2020/12/02/19/00/tacos-5798445_960_720.jpg" },
-  { id: 3, name: "Sushi Bar", location: "Sur", type: "Japonesa", price: "Alto", rating: 4.8, image: "https://cdn.pixabay.com/photo/2020/03/22/08/43/sushi-4956246_960_720.jpg" },
-  { id: 4, name: "Parrilla Argentina", location: "Centro", type: "Argentina", price: "Medio", rating: 4.7, image: "https://cdn.pixabay.com/photo/2017/10/06/16/28/bbq-2823707_1280.jpg" },
-  { id: 5, name: "Cafetería Francesa", location: "Norte", type: "Francesa", price: "Medio", rating: 4.3, image: "https://cdn.pixabay.com/photo/2016/08/04/18/16/coffee-1569682_960_720.jpg" },
-  { id: 6, name: "Como dice el dicho", location: "Centro", type: "Mexicana", price: "Bajo", rating: 4.3, image: "https://cdn.pixabay.com/photo/2016/09/01/22/43/coffee-1637907_640.jpg" },
-  { id: 7, name: "Tacos los primos", location: "Norte", type: "Mexicana", price: "Bajo", rating: 4.3, image: "https://cdn.pixabay.com/photo/2014/01/14/22/14/tacos-245241_640.jpg" },
-  { id: 8, name: "Manduca", location: "Sur", type: "Italiana", price: "Alto", rating: 4.3, image: "https://cdn.pixabay.com/photo/2021/05/18/15/15/pasta-6263653_640.jpg" },
-  { id: 9, name: "Mushu Sushi", location: "Centro", type: "Japonesa", price: "Medio", rating: 5.0, image: "https://cdn.pixabay.com/photo/2023/07/07/17/47/sushi-8113165_1280.jpg" },
-  { id: 10, name: "Mi refugio", location: "Norte", type: "Mexiacana", price: "Alto", rating: 4.3, image: "https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_640.jpg" },
-];
-
-export default function Home() {
-  const [filters, setFilters] = useState({ location: "", type: "", price: "", rating: "" });
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 1; // Número de restaurantes visibles a la vez
-
-  const handleFilterChange = (e) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
-
-  const filteredRestaurants = restaurants.filter((restaurant) => {
-    return (
-      (filters.location === "" || restaurant.location === filters.location) &&
-      (filters.type === "" || restaurant.type === filters.type) &&
-      (filters.price === "" || restaurant.price === filters.price) &&
-      (filters.rating === "" || restaurant.rating >= parseFloat(filters.rating))
-    );
-  });
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + visibleCount) % filteredRestaurants.length);
-  };
-
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - visibleCount + filteredRestaurants.length) % filteredRestaurants.length);
-  };
-
-  const visibleRestaurants = filteredRestaurants.slice(currentIndex, currentIndex + visibleCount);
-
+export default function HomePage() {
+  const [showModal, setShowModal]= useState(false);
+  const navigate = useNavigate();
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Restaurantes Disponibles</h1>
-
-      {/* Filtros */}
-      <div className="flex flex-wrap gap-4 mb-4">
-        <select name="location" onChange={handleFilterChange} className="p-2 border rounded">
-          <option value="">Ubicación</option>
-          <option value="Centro">Centro</option>
-          <option value="Norte">Norte</option>
-          <option value="Sur">Sur</option>
-        </select>
-
-        <select name="type" onChange={handleFilterChange} className="p-2 border rounded">
-          <option value="">Tipo de Cocina</option>
-          <option value="Italiana">Italiana</option>
-          <option value="Mexicana">Mexicana</option>
-          <option value="Japonesa">Japonesa</option>
-          <option value="Francesa">Francesa</option>
-          <option value="Argentina">Argentina</option>
-        </select>
-
-        <select name="price" onChange={handleFilterChange} className="p-2 border rounded">
-          <option value="">Precio</option>
-          <option value="$">Bajo</option>
-          <option value="$$">Medio</option>
-          <option value="$$$">Alto</option>
-        </select>
-
-        <select name="rating" onChange={handleFilterChange} className="p-2 border rounded">
-          <option value="">Calificación</option>
-          <option value="4.0">4.0+</option>
-          <option value="4.5">4.5+</option>
-        </select>
-      </div>
-
-      {/* Carrusel de restaurantes */}
-      <div className="relative">
-        <button
-          onClick={handlePrevious}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        >
-          &lt;
-        </button>
-        <div className="flex gap-4 mx-10">
-          {visibleRestaurants.map((restaurant) => (
-            <div key={restaurant.id} className="bg-white shadow-md rounded-lg p-4 flex-1">
-              <img src={restaurant.image} alt={restaurant.name} className="w-full h-40 object-cover rounded-md" />
-              <h2 className="text-xl font-semibold mt-2">{restaurant.name}</h2>
-              <p className="text-gray-600">{restaurant.location} | {restaurant.type} | {restaurant.price}</p>
-              <p className="text-yellow-500 font-bold">⭐ {restaurant.rating}</p>
-              <Link to={`/restaurant/${restaurant.id}`} className="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">
-                Ver detalles
-              </Link>
-            </div>
-
-          ))}
+    <div className="min-h-screen flex flex-col">
+      {/* About Section */}
+      <section className="p-6 text-center bg-gray-800">
+        <h3 className="text-3xl text-neutral-100  font-semibold mb-4">Sobre R Serva</h3>
+        <p className="text-neutral-100 max-w-3xl mx-auto">
+          R Serva es una plataforma diseñada para facilitar la reserva de citas en restaurantes de manera sencilla y rápida.
+          Con nuestra interfaz intuitiva, los usuarios pueden explorar opciones y agendar fácilmente.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="w-80 h-48 mr-4 mb-10 bg-gray-300 flex items-center justify-center"><img src="https://cdn.pixabay.com/photo/2021/09/02/13/36/pizza-6593504_960_720.jpg" alt="restaurante representativo"/> </div>
+          <div className="w-80 h-48 ml-4 mb-10  float-left mr-7 bg-gray-300 flex items-center justify-center"><img src="https://cdn.pixabay.com/photo/2016/08/04/18/16/coffee-1569682_960_720.jpg" alt="imagen representativa" /></div>
+          <div className="w-80 h-48 mr-4 mr-4 bg-gray-300 flex items-center justify-center"><img src="https://cdn.pixabay.com/photo/2023/07/07/17/47/sushi-8113165_1280.jpg" alt="imagen representativa" /></div>
         </div>
-        <button
-          onClick={handleNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        >
-          &gt;
-        </button>
+      </section>
+
+      {/* Features Section */}
+      <section className="p-6 bg-neutra-l00 text-center">
+        <h3 className="text-4xl font-bold mb-4">¿Por qué elegirnos?</h3>
+        <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+          <div className="w-72 p-4 bg-gray-800 shadow-lg rounded-lg">
+            <h4 className="text-xl text-white font-bold mb-2">Fácil de usar</h4>
+            <p className="text-neutral-100">Nuestra plataforma es intuitiva y permite agendar citas en pocos pasos.</p>
+          </div>
+          <div className="w-72 p-4 bg-gray-800 shadow-lg rounded-lg">
+            <h4 className="text-xl text-white font-bold mb-2">Acceso en cualquier momento</h4>
+            <p className="text-neutral-100">Reserva desde cualquier dispositivo, sin descargas ni instalaciones.</p>
+          </div>
+          <div className="w-72 p-4 bg-gray-800 shadow-lg rounded-lg">
+            <h4 className="text-xl text-white font-bold mb-2">Confirmación instantánea</h4>
+            <p className="text-neutral-100">Recibe notificaciones y confirma tus citas al instante.</p>
+          </div>
+        </div>
+      </section>
+
+     
+
+      {/* Hero Section (moved to the end) */}
+      <header className="flex-1 flex flex-col items-center justify-center text-center p-6 bg-gray-800 text-white">
+        <h2 className="text-4xl font-bold mb-4">Registrate ahora</h2>
+        <div className="mt-6">
+          <button onClick={() => setShowModal(true)} className="px-6 py-3 bg-white text-green-900 rounded-lg text-lg font-semibold shadow-md transition-transform transform hover:scale-105 hover:bg-gray-200 cursor-pointer">
+            Registrarse
+          </button>
+        </div>
+      </header>
+      {/*Modal*/}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
+          <h3 className="text-xl font-semibold mb-4">Elige tu tipo de cuenta</h3>
+          <div className="flex gap-4">
+            <div 
+              className="w-1/2 p-4 border rounded-lg hover:bg-gray-100 cursor-pointer"
+              onClick={() => navigate("/LoginUsuario")}
+            >
+              <div className="w-full h-32 bg-gray-300 flex items-center justify-center">Imagen Usuario</div>
+              <p className="mt-2 font-semibold">Usuario</p>
+              <p className="mt-2 text-gray-800 items-center justify-center">Comienza a reservar ahora</p>
+            </div>
+            <div 
+              className="w-1/2 p-4 border rounded-lg hover:bg-gray-100 cursor-pointer"
+              onClick={() => navigate("/LoginAdmin")}
+            >
+              <div className="w-full h-32 bg-gray-300 flex items-center justify-center">Imagen Administrador</div>
+              <p className="mt-2 font-semibold">Administrador</p>
+              <p className="mt-2 text-gray-800 items-center justify-center">Comienza ahora y haz crecer tu negocio</p>
+            </div>
+          </div>
+          <button onClick={() => setShowModal(false)} className="mt-4 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-green-900">
+            Cerrar
+          </button>
+        </div>
       </div>
+      )}
+        
+
+       {/* Contact Section */}
+       <section className="p-6 text-center">
+        <h3 className="text-2xl font-semibold mb-4">Síguenos</h3>
+        <p className="text-gray-700">Síguenos en nuestras redes sociales o envíanos un mensaje.</p>
+        <div className="mt-4 flex justify-center space-x-6">
+          <a href="#" className="text-pink-600 text-3xl hover:scale-110 transition-transform"><FaInstagram /></a>
+          <a href="#" className="text-blue-600 text-3xl hover:scale-110 transition-transform"><FaFacebook /></a>
+          <a href="#" className="text-black text-3xl hover:scale-110 transition-transform"><FaTiktok /></a>
+          <a href="#" className="text-blue-400 text-3xl hover:scale-110 transition-transform"><FaTwitter /></a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="p-4 bg-gray-800 text-white text-center">
+        <p>&copy; 2025 R Serva. Todos los derechos reservados.</p>
+      </footer>
     </div>
   );
 }
